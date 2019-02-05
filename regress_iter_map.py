@@ -23,18 +23,19 @@ Y = dataset[:,1]
 model = Sequential()
 model.add(Dense(112, input_dim=112, activation='relu'))
 model.add(Dense(256, activation='relu'))
-model.add(Dense(1, activation='relu'))
+model.add(Dense(1, activation='linear'))
 
 # Set up an optimizer.
-sgd = optimizers.SGD(lr=0.1)
+opt = optimizers.Adam(lr=1e-3, decay=1e-3 / 200)
 
 # Compile the model.
-model.compile(loss='mean_absolute_error', optimizer=sgd, metrics=['accuracy'])
+model.compile(loss='mean_absolute_percentage_error', optimizer=opt)
 
 # Fit the model.
-model.fit(X, Y, epochs=150, batch_size=10)
+#model.fit(X, Y, epochs=150, batch_size=10)
+model.fit(X, Y, epochs=1280, batch_size=10)
 
 # Evaluate the model.
 scores = model.evaluate(X, Y)
-print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+print(scores * 100)
 sys.exit(0)
