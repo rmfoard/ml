@@ -32,8 +32,8 @@ opt = optimizers.Adam(lr=1e-3, decay=1e-3 / 200)
 model.compile(loss='mean_absolute_percentage_error', optimizer=opt)
 
 # Fit the model.
-#model.fit(X, Y, epochs=150, batch_size=10)
-model.fit(X, Y, epochs=1280, batch_size=10)
+model.fit(X, Y, epochs=150, batch_size=10)
+#model.fit(X, Y, epochs=1280, batch_size=10)
 
 # Evaluate the model.
 scores = model.evaluate(X, Y)
